@@ -31,8 +31,22 @@ export const GlobalStyle = createGlobalStyle`
         height: 3rem;
         border-radius: 0.4rem;
         background-color: #FFFFFF;
-        color: #747688;
+        color: #3d3d3d;
         font-family: "Baloo 2", sans-serif;
+
+        ::placeholder {
+            color: #747688;
+            font-family: "Baloo 2", sans-serif;
+            position: absolute;
+            top: 0.5rem;
+            left: 0.5rem;
+            font-size: 0.8rem;
+        }
+    }
+
+    input:focus {
+        outline: none;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     h1 {
