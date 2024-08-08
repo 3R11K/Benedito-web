@@ -1,10 +1,11 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, styled } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
     body {
         background-color: #E1E1E1;
         margin: 0.5rem;
         display: flex;
+        flex-direction: row ;
     }
 
     button {
@@ -53,5 +54,15 @@ export const GlobalStyle = createGlobalStyle`
         font-family: "Poppins", sans-serif;
         color: #3D1C03;
     }
+`;
+
+export const BodySite = styled.div`
+    padding-left: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
+    height: 100%;
+    background-color: transparent;
 `;
 

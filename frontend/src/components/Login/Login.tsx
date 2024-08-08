@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import Logo from '../Logo/Logo.tsx';
 import logoGoogle from '../../images/google-icon.svg';
 import { AuthContext } from '../../context/AuthContext/AuthContext.tsx';
-import { GlobalStyle } from '../../Global.tsx';
 import { Container, LoginInput, AContainer, LoginButton, Link, LogoContainer, Hello, HelloPhrase, Name, GoogleImage, OrSeparator, PLink, RegContainer } from './styles.tsx';
 import { signGoogle, signInEmailPass } from '../../Firebase/auth.js';
 import { Navigate } from 'react-router-dom';
@@ -50,7 +49,6 @@ const Login: React.FC = () => {
     return (
         <>
             {currentUser && <Navigate to="/" />}
-            <GlobalStyle />
             <LogoContainer>
                 <Logo radius="18" />
             </LogoContainer>

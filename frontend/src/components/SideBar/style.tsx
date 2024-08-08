@@ -5,11 +5,11 @@ export const SideBarContainer = styled.div`
     flex-direction: column;
     align-items: center;
     height: 100%;
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     background-color: #3D1C03;
-    width: 225px;
+    width: 15%;
 `;
 
 export const ProfileName = styled.h1`
