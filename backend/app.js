@@ -6,9 +6,9 @@ const cors = require('cors');
 require('dotenv').config();
 
 //import routes
-const authRoutes = require('./routes/auth.ts');
-const userRoutes = require('./routes/user.ts');
-const eventsRoutes = require('./routes/events.ts');
+const authRoutes = require('./routes/auth.js');
+const userRoutes = require('./routes/user.js');
+const eventsRoutes = require('./routes/events.js');
 
 //middlewares
 app.use(cors());

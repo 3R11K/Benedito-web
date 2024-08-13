@@ -1,7 +1,7 @@
-import express from 'express';
-import DbConn from '../services/dbConn';
-import encrypt from '../services/encrypt';
-import GenTokens from '../services/token';
+const express = require('express');
+const DbConn = require('../services/dbConn');
+const encrypt = require('../services/encrypt');
+const GenTokens = require('../services/token');
 const router = express.Router();
 
 const googleUsers = process.env.GOOGLE_USERS_CHECK;

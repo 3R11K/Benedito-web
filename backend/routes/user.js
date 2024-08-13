@@ -1,4 +1,5 @@
-const newDbConn = require("../db/dbConn.ts");
+const newDbConn = require("../services/dbConn");
+const express = require("express")
 const userRouter = express.Router();
 
 userRouter.get("/get/:id", async (req, res) => {
