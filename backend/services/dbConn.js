@@ -29,6 +29,11 @@ class DbConn {
         const query = this.conn`SELECT * FROM eventos`;
         return query;
     }
+
+    async createEvent(event){
+        const query = this.conn`INSERT INTO eventos (titulo, data_inicio, data_fim, duracao, local, palestrante, imagem, sobre) VALUES(${event.titulo}, ${event.data_inicio}, ${event.data_fim}, ${event.duracao}, ${event.local}, ${event.palestrante}, ${event.imagem}, ${event.sobre});`
+        return query
+    }
 }
 
 module.exports = DbConn;

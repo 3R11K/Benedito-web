@@ -8,4 +8,12 @@ router.get("/get/", async (req, res) => {
     res.json(events);
 })
 
+router.post("/post/", async (req, res) => {
+    const dbConn = new newDbConn();
+    const event = req.body
+    console.log(event)
+    const result = await dbConn.createEvent(event)
+    res.json(result);
+})
+
 module.exports = router
