@@ -9,6 +9,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/auth.js');
 const userRoutes = require('./routes/user.js');
 const eventsRoutes = require('./routes/events.js');
+const indicationRoutes = require('./routes/indication.js')
 
 //middlewares
 app.use(cors());
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/events', eventsRoutes);
+app.use('/api/indications', indicationRoutes)
 
 //port
 const port = process.env.PORT || 8000;

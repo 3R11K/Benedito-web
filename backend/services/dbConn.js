@@ -34,6 +34,11 @@ class DbConn {
         const query = this.conn`INSERT INTO eventos (titulo, data_inicio, data_fim, duracao, local, palestrante, imagem, sobre) VALUES(${event.titulo}, ${event.data_inicio}, ${event.data_fim}, ${event.duracao}, ${event.local}, ${event.palestrante}, ${event.imagem}, ${event.sobre});`
         return query
     }
+
+    async createIndication(indication){
+        const query = this.conn`INSERT INTO indicacao (titulo, texto, user_id) VALUES(${indication.titulo}, ${indication.texto}, ${indication.user_id});`
+        return query
+    }
 }
 
 module.exports = DbConn;
