@@ -1,3 +1,4 @@
+import { redirect } from 'react-router-dom';
 import {auth} from './Firebase';
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword} from 'firebase/auth';
 
@@ -18,15 +19,18 @@ export const signGoogle = async () => {
 }
 
 export const signOut = async () => {
-    return auth.signOut();
+    //delete token from local storage
+    localStorage.removeItem('accessToken');
+    await auth.signOut();
+    window.location.href = '/login';
 }
 
 export const passwordReset = async (email) => {
-    return sendPasswordResetEmail(auth, email);
+    return auth.sendPasswordResetEmail(auth, email);
 }
 
 export const passwordUpdate = async (password) => {
-    return updatePassword(auth.currentUser, password);
+    return auth.updatePassword(auth.currentUser, password);
 }
 
 export const sendEmailVerification = async () => {

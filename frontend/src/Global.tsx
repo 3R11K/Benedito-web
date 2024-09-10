@@ -57,12 +57,13 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const BodySite = styled.div`
-    padding-left: 15%;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 85%;
     height: 100%;
     background-color: transparent;
+    position: fixed;
+    right: 0;
 `;
 

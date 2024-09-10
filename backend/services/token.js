@@ -3,16 +3,19 @@ const expressJwt = require('express-jwt');
 const bcrypt = require('bcrypt');
 const { Interface } = require('readline');
 
-const secret = process.env.SECRET;
+require('dotenv').config();
 
 
 class GenTokens{
-    static newAccessToken(user){
-        return jwt.sign({id: user.id, nome: user.nome}, secret, {expiresIn: '2d'});
+    constructor(){
+        this.secret = process.env.SECRET
+    }
+    async newAccessToken(user){
+        return jwt.sign({id: user.id, nome: user.nome}, this.secret, {expiresIn: '2d'});
     }
 
-    static verifyToken(token, name, id){
-        return jwt.verify(token, secret, (err, decoded) => {
+    async verifyToken(token, name, id){
+        return jwt.verify(token, this.secret, (err, decoded) => {
             if(err){
                 return false;
             }
@@ -30,3 +33,5 @@ class GenTokens{
 
 
 }
+
+module.exports = GenTokens;

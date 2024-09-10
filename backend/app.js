@@ -2,6 +2,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+
 const cors = require('cors');
 require('dotenv').config();
 
@@ -13,6 +15,7 @@ const indicationRoutes = require('./routes/indication.js')
 
 //middlewares
 app.use(cors());
+app.use(cookieParser());
 app.use(bodyParser.json());
 
 //routes
