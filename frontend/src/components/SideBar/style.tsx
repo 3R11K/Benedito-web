@@ -10,6 +10,7 @@ export const SideBarContainer = styled.div`
     top: 0;
     background-color: #3D1C03;
     width: 15%;
+    
 `;
 
 export const ProfileName = styled.h1`
@@ -35,7 +36,7 @@ export const ButtonsContainer = styled.div`
     width: 100%;
 `;
 
-export const SideBarButton = styled.button`
+const ButtonBase = styled.button`
     background-color: transparent;
     border: none;
     color: white;
@@ -49,16 +50,5 @@ export const SideBarButton = styled.button`
     padding-left: 30px;
 `;
 
-export const LogOutButton = styled.button`
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 1rem;
-    margin-top: 15px;
-    font-family: "Abel", sans-serif;
-    font-weight: lighter;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    
-`;
+export const SideBarButton = styled(ButtonBase)``;
+export const LogOutButton = styled(ButtonBase)``;

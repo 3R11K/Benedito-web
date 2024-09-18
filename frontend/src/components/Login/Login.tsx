@@ -1,10 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import Logo from '../Logo/Logo.tsx';
 import logoGoogle from '../../images/google-icon.svg';
 import { AuthContext } from '../../context/AuthContext/AuthContext.tsx';
+import { loginGoogle } from "../../services/Login.js";
 import { Container, LoginInput, AContainer, LoginButton, Link, LogoContainer, Hello, HelloPhrase, Name, GoogleImage, OrSeparator, PLink, RegContainer } from './styles.tsx';
 import { signGoogle, signInEmailPass } from '../../Firebase/auth.js';
-import { Navigate } from 'react-router-dom';
+import Loading from '../Loading/Loading.tsx';
 
 const Login: React.FC = () => {
     const { currentUser } = useContext(AuthContext);
@@ -12,43 +14,54 @@ const Login: React.FC = () => {
     const [password, setPassword] = useState('');
     const [signing, setSigning] = useState(false);
     const [error, setError] = useState('');
+    const [canRedirect, setCanRedirect] = useState(false);
 
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value);
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
 
-    const onSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!signing) {
-            setSigning(true);
-            try {
-                console.log(await signInEmailPass(username, password))
-            } catch (error) {
-                setError(error.message);
-                setSigning(false);
+    const onGoogleLogin = async () => {
+        setSigning(true);
+        try {
+            let user = await signGoogle();
+            if (user.user) {
+                await loginGoogle(user.user.email, user.user.displayName);
+                setCanRedirect(true);
             }
+        } catch (error) {
+            setError(error.message);
         }
+        setSigning(false);
     };
 
-    const onGoogleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!signing) {
-            setSigning(true);
-            try {
-                await signGoogle();
-            } catch (error) {
-                setError(error.message);
-                setSigning(false);
-            }
+    const onSubmit = async () => {
+        setSigning(true);
+        try {
+            await signInEmailPass(username, password);
+            setCanRedirect(true);
+        } catch (error) {
+            setError(error.message);
+        }
+        setSigning(false);
+    }
+
+    const checkLoginStatus = async () => {
+        if (currentUser != null) {
+            await loginGoogle(currentUser.email, currentUser.displayName);
+        }
+        if (localStorage.getItem('accessToken')) {
+            setCanRedirect(true);
         }
     };
-
+    
     useEffect(() => {
-        console.log(currentUser);
+        console.log("currentuser: ", currentUser);
+        checkLoginStatus();
     }, [currentUser]);
 
     return (
         <>
-            {currentUser && <Navigate to="/" />}
+            {signing ? <Loading /> : null}
+            {canRedirect && <Navigate to="/" />}
             <LogoContainer>
                 <Logo radius="18" />
             </LogoContainer>
@@ -67,8 +80,8 @@ const Login: React.FC = () => {
                 <LoginInput type="password" value={password} onChange={handlePasswordChange} placeholder="Senha" />
                 <AContainer>
                     <RegContainer>
-                        <PLink>Não tem uma conta?  </PLink>
-                        <Link href="/register" color="#EDD62E">  Registre-se</Link>
+                        <PLink>Não tem uma conta?</PLink>
+                        <Link href="/register" color="#EDD62E">Registre-se</Link>
                     </RegContainer>
                     <Link href="/forgot-password" color='#EDD62E'>Esqueceu sua senha?</Link>
                 </AContainer>

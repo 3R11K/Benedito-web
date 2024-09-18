@@ -4,41 +4,89 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const connString = process.env.CONNSTRING;
+const userRole = process.env.USER_ROLE;
+const adminRole = process.env.ADM_ROLE;
 
 class DbConn {
 
     constructor() {
         this.conn = postgres(connString);
+        this.userRole = userRole;
+        this.adminRole = adminRole;
     }
 
     async query(query, params) {
-        return this.conn.query(query, params);
+        try {
+            return await this.conn.query(query, params);
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 
     async getUserAndPass(username){
-        const query = this.conn`SELECT email,senha  FROM users WHERE nome = ${username}`;
-        return query;
+        try {
+            const query = this.conn`SELECT email,senha  FROM users WHERE nome = ${username}`;
+            return await query;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 
-    async addUser(user){
-        const query = this.conn`INSERT INTO users(nome,email,senha) VALUES(${user.name},${user.email},${user.password})`;
-        return query;
+    async addUser(user) {
+        if (!user.name || !user.email || !user.password) {
+            throw new Error("Invalid user data");
+        }
+        try {
+            const query = this.conn`INSERT INTO users(nome,email,senha, cargo_id) VALUES(${user.name},${user.email},${user.password}, ${this.userRole})`;
+            return await query;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
+    
 
     async getEvents(){
-        const query = this.conn`SELECT * FROM eventos`;
-        return query;
+        try {
+            const query = this.conn`SELECT * FROM eventos`;
+            return await query;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 
     async createEvent(event){
-        const query = this.conn`INSERT INTO eventos (titulo, data_inicio, data_fim, duracao, local, palestrante, imagem, sobre) VALUES(${event.titulo}, ${event.data_inicio}, ${event.data_fim}, ${event.duracao}, ${event.local}, ${event.palestrante}, ${event.imagem}, ${event.sobre});`
-        return query
+        try {
+            const query = this.conn`INSERT INTO eventos (titulo, data_inicio, data_fim, duracao, local, palestrante, imagem, sobre) VALUES(${event.titulo}, ${event.data_inicio}, ${event.data_fim}, ${event.duracao}, ${event.local}, ${event.palestrante}, ${event.imagem}, ${event.sobre});`;
+            return await query;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 
     async createIndication(indication){
-        const query = this.conn`INSERT INTO indicacao (titulo, texto, user_id) VALUES(${indication.titulo}, ${indication.texto}, ${indication.user_id});`
-        return query
+        try {
+            const query = this.conn`INSERT INTO indicacao (titulo, texto, user_id) VALUES(${indication.titulo}, ${indication.texto}, ${indication.user_id});`;
+            return await query;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
+
+    async getUser(email) {
+        try {
+            const query = await this.conn`SELECT id, nome, email FROM users WHERE email = ${email}`;
+            return query[0]; // Ensure that query is an array and return the first result.
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }    
 }
 
 module.exports = DbConn;

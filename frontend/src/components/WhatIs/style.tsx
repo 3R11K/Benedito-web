@@ -6,5 +6,18 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #ffffff;
-  width: 32rem;
+  width: 38rem;
+  border-radius: 0.4rem;
+  padding: 0% 10% 0% 10%;
+  height: 13.333rem;
+
+  h1{
+    font-family: "Poppins", sans-serif;
+    color: #3D1C03;
+    font-size: 1.5rem;
+    margin-top: 0;
+  }
 `;
+
+
+

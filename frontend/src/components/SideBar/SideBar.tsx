@@ -11,7 +11,7 @@ function SideBar() {
         <SideBarContainer>
             <ProfileContainer>
                 <ProfilePhoto radius="5" src={currentUser?.photoURL ?? ""}/>
-                <ProfileName>{currentUser && currentUser.displayName}</ProfileName>
+                <ProfileName>{currentUser?.displayName || "Usuário"}</ProfileName>
             </ProfileContainer>
             <ButtonsContainer>
                 <SideBarButton><User size={25} color="white" style={{marginRight: "10px"}} />Perfil</SideBarButton>
