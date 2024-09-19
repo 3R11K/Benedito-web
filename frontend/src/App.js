@@ -9,7 +9,7 @@ const App = () => (
     <GlobalStyle />
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/" element={<Home />} />
       </Routes>
     </Router>

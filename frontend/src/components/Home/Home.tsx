@@ -5,21 +5,22 @@ import { Navigate } from "react-router-dom";
 import WhatIs from "../WhatIs/WhatIs.tsx";
 import { BodySite } from "../../Global.tsx";
 import { HomeGrid } from "./style.tsx";
+import { CardExp } from "../CardExp/CardExp.tsx";
 
 
 const Home = () => {
     const { currentUser } = useContext(AuthContext);
     const [redirect, setRedirect] = useState(false);
 
-    useEffect(() => {
-        if(!localStorage.getItem('accessToken')) {
-            setRedirect(true);
-        }
-    }, []);
+    // useEffect(() => {
+    //     if(!localStorage.getItem('accessToken')) {
+    //         setRedirect(true);
+    //     }
+    // }, []);
 
-    if (redirect) {
-        return <Navigate to="/login" />;
-    }
+    // if (redirect) {
+    //     return <Navigate to="/login" />;
+    // }
     
     return (
         <>
@@ -27,7 +28,7 @@ const Home = () => {
             <BodySite>
                 <HomeGrid>
                     <WhatIs />
-                    
+                    <
                 </HomeGrid>
             </BodySite>
         </>
