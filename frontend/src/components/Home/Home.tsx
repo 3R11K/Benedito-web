@@ -11,6 +11,7 @@ import { BodySite } from "../../Global.tsx";
 import { HomeGrid, LeftColumn, RightColumn, SiteTitle } from "./style.tsx";
 import { getEvents } from "../../services/EventService.js"
 
+
 const Home = () => {
     const { currentUser } = useContext(AuthContext);
     const [redirect, setRedirect] = useState(false);
