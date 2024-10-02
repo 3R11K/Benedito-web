@@ -1,7 +1,7 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import ProfilePhoto from "../ProfilePhoto/ProfilePhoto.tsx";
 import { AuthContext } from "../../context/AuthContext/AuthContext.tsx";
-import { ProfileName, SideBarContainer, ProfileContainer, ButtonsContainer, SideBarButton, LogOutButton } from "./style.tsx";
+import { ProfileName, SideBarContainer, ProfileContainer, ButtonsContainer, SideBarButton, LogOutButton, IconWrapper } from "./style.tsx";
 import { User, Calendar, LogOut } from 'react-feather';
 import { signOut } from "../../Firebase/auth.js";
 
@@ -11,6 +11,7 @@ function SideBar() {
     const calendarClick = () => {
         window.location.href = "/calendar";
     }
+
     return (
         <SideBarContainer>
             <ProfileContainer>
@@ -18,11 +19,20 @@ function SideBar() {
                 <ProfileName>{currentUser?.displayName || "Usuário"}</ProfileName>
             </ProfileContainer>
             <ButtonsContainer>
-                <SideBarButton ><User size={25} color="white" style={{marginRight: "10px"}} />Perfil</SideBarButton>
-                <SideBarButton onClick={calendarClick}><Calendar size={25} color="white" style={{marginRight: "10px"}} />Calendário</SideBarButton>
+                <SideBarButton>
+                    <IconWrapper><User /></IconWrapper>
+                    Perfil
+                </SideBarButton>
+                <SideBarButton onClick={calendarClick}>
+                    <IconWrapper><Calendar /></IconWrapper>
+                    Calendário
+                </SideBarButton>
             </ButtonsContainer>
-            <ButtonsContainer style={{position:"absolute",left:"20px",bottom:"30px"}}>
-                <LogOutButton onClick={signOut}><LogOut size={25} color="white" style={{marginRight: "10px"}}/>Sair</LogOutButton>
+            <ButtonsContainer style={{ position: "absolute", left: "20px", bottom: "30px" }}>
+                <LogOutButton onClick={signOut}>
+                    <IconWrapper><LogOut /></IconWrapper>
+                    Sair
+                </LogOutButton>
             </ButtonsContainer>
         </SideBarContainer>
     );

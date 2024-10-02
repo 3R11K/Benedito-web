@@ -10,7 +10,6 @@ export const SideBarContainer = styled.div`
     top: 0;
     background-color: #3D1C03;
     width: 13%;
-    
 `;
 
 export const ProfileName = styled.h1`
@@ -52,3 +51,17 @@ const ButtonBase = styled.button`
 
 export const SideBarButton = styled(ButtonBase)``;
 export const LogOutButton = styled(ButtonBase)``;
+
+export const IconWrapper = styled.div`
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+
+    & > svg {
+        width: 100%;
+        height: 100%;
+    }
+`;
