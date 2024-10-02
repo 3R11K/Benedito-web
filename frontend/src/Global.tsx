@@ -1,11 +1,14 @@
-import { createGlobalStyle, styled } from 'styled-components';
+import { createGlobalStyle, styled } from "styled-components";
+
 
 export const GlobalStyle = createGlobalStyle`
     body {
         background-color: #E1E1E1;
         margin: 0.5rem;
         display: flex;
-        flex-direction: row ;
+        flex-direction: row;
+        width: 100vw; /* Define a largura do body para a largura da janela */
+        box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
     }
 
     button {
@@ -19,7 +22,7 @@ export const GlobalStyle = createGlobalStyle`
         color: #3D1C03;
         height: 3rem;
         transition: all 0.3s ease-in-out;
-        cursor: pointer; /* Added this line */
+        cursor: pointer; 
     }
 
     button:hover {
@@ -38,9 +41,6 @@ export const GlobalStyle = createGlobalStyle`
         ::placeholder {
             color: #747688;
             font-family: "Baloo 2", sans-serif;
-            position: absolute;
-            top: 0.5rem;
-            left: 0.5rem;
             font-size: 0.8rem;
         }
     }
@@ -54,16 +54,22 @@ export const GlobalStyle = createGlobalStyle`
         font-family: "Poppins", sans-serif;
         color: #3D1C03;
     }
+
+    h2{
+        font-family: "Poppins", sans-serif;
+        color: #3D1C03;
+    }
 `;
 
 export const BodySite = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 85%;
+    width: 88%;
     height: 100%;
+    margin-left: 13%;
+    flex: 1 0 auto; /* O conteúdo principal ocupa o espaço restante */
     background-color: transparent;
     position: fixed;
-    right: 0;
+    overflow-y: auto; /* Ativa a rolagem vertical */
 `;
-

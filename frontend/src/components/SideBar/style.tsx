@@ -9,13 +9,13 @@ export const SideBarContainer = styled.div`
     left: 0;
     top: 0;
     background-color: #3D1C03;
-    width: 15%;
+    width: 13%;
     
 `;
 
 export const ProfileName = styled.h1`
     color: white;
-    font-size: 1.2rem;
+    font-size: 125%;
     margin-top: 15px;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
@@ -40,14 +40,14 @@ const ButtonBase = styled.button`
     background-color: transparent;
     border: none;
     color: white;
-    font-size: 1rem;
+    font-size: 1em;
     margin-top: 15px;
     font-family: "Abel", sans-serif;
     font-weight: lighter;
     cursor: pointer;
     display: flex;
     align-items: center;
-    padding-left: 30px;
+    padding-left: 10%;
 `;
 
 export const SideBarButton = styled(ButtonBase)``;

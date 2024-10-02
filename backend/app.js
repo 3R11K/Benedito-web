@@ -18,6 +18,9 @@ app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
+//create a dependency to protect routes
+const { requireSignin } = require('./services/auth');
+
 //routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);

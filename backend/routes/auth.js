@@ -95,12 +95,26 @@ router.get("/check" , async (req, res) => {
     if(!accessToken){
         return res.json({error: "Usuário não logado"});
     }
-    const user = genTokens.verifyAccessToken(accessToken, );
+    const user = genTokens.verifyAccessToken(accessToken);
+    console.log("user: ", user);
     if(user){
         res.json({message: "Usuário logado"});
     }else{
         res.json({error: "Usuário não logado"});
     }
+});
+
+router.post("/verify", async (req, res) => {
+    const accessToken = req.body.accessToken;
+    console.log("accessToken: ", accessToken);
+    const user = await genTokens.verifyToken(accessToken);
+    console.log("user: ", user);
+    if(user.cargo === db.adminRole){
+        res.json({admin: true});
+    }else{
+        res.json({admin: false});
+    }
+
 });
 
 module.exports = router;

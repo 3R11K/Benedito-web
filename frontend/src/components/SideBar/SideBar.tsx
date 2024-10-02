@@ -7,6 +7,10 @@ import { signOut } from "../../Firebase/auth.js";
 
 function SideBar() {
     const { currentUser } = useContext(AuthContext);
+
+    const calendarClick = () => {
+        window.location.href = "/calendar";
+    }
     return (
         <SideBarContainer>
             <ProfileContainer>
@@ -14,8 +18,8 @@ function SideBar() {
                 <ProfileName>{currentUser?.displayName || "Usuário"}</ProfileName>
             </ProfileContainer>
             <ButtonsContainer>
-                <SideBarButton><User size={25} color="white" style={{marginRight: "10px"}} />Perfil</SideBarButton>
-                <SideBarButton><Calendar size={25} color="white" style={{marginRight: "10px"}} />Calendário</SideBarButton>
+                <SideBarButton ><User size={25} color="white" style={{marginRight: "10px"}} />Perfil</SideBarButton>
+                <SideBarButton onClick={calendarClick}><Calendar size={25} color="white" style={{marginRight: "10px"}} />Calendário</SideBarButton>
             </ButtonsContainer>
             <ButtonsContainer style={{position:"absolute",left:"20px",bottom:"30px"}}>
                 <LogOutButton onClick={signOut}><LogOut size={25} color="white" style={{marginRight: "10px"}}/>Sair</LogOutButton>

@@ -58,9 +58,30 @@ class DbConn {
         }
     }
 
+    async getEvent(id) {
+        try {
+            const query = this.conn`SELECT * FROM eventos WHERE id = ${id}`;
+            return await query;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     async createEvent(event){
         try {
-            const query = this.conn`INSERT INTO eventos (titulo, data_inicio, data_fim, duracao, local, palestrante, imagem, sobre) VALUES(${event.titulo}, ${event.data_inicio}, ${event.data_fim}, ${event.duracao}, ${event.local}, ${event.palestrante}, ${event.imagem}, ${event.sobre});`;
+            let event_no_image = {
+                titulo: event.titulo,
+                data_inicio: event.data_inicio,
+                data_fim: event.data_fim,
+                duracao: event.duracao,
+                local: event.local,
+                palestrante: event.palestrante,
+                sobre: event.sobre
+            }
+
+            console.log(event_no_image);
+            const query = this.conn`INSERT INTO eventos (titulo, data_inicio, data_fim, duracao, local, palestrante, img, sobre) VALUES(${event.titulo}, ${event.data_inicio}, ${event.data_fim}, ${event.duracao}, ${event.local}, ${event.palestrante}, ${event.img}, ${event.sobre});`;
             return await query;
         } catch (error) {
             console.error(error);
@@ -80,7 +101,7 @@ class DbConn {
 
     async getUser(email) {
         try {
-            const query = await this.conn`SELECT id, nome, email FROM users WHERE email = ${email}`;
+            const query = await this.conn`SELECT id, nome, email, cargo_id FROM users WHERE email = ${email}`;
             return query[0]; // Ensure that query is an array and return the first result.
         } catch (error) {
             console.error(error);
