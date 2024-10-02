@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import Logo from '../Logo/Logo.tsx';
 import logoGoogle from '../../images/google-icon.svg';
@@ -33,7 +33,11 @@ const Login: React.FC = () => {
         setSigning(false);
     };
 
+    const isSubmitting = useRef(false);
+
     const onSubmit = async () => {
+        if (isSubmitting.current) return; // Impede login múltiplo
+        isSubmitting.current = true; // Bloqueia múltiplas submissões
         setSigning(true);
         try {
             await signInEmailPass(username, password);
@@ -42,7 +46,9 @@ const Login: React.FC = () => {
             setError(error.message);
         }
         setSigning(false);
+        isSubmitting.current = false; // Libera a submissão
     }
+
 
     const checkLoginStatus = async () => {
         if (currentUser != null) {
@@ -70,9 +76,11 @@ const Login: React.FC = () => {
                     <HelloPhrase>Bem vindo ao</HelloPhrase>
                     <Name>Benedito Caravelas</Name>
                 </Hello>
-                <LoginButton color='#FFFF' onClick={onGoogleLogin}>
+                <LoginButton color='#FFFF' onClick={onGoogleLogin} disabled={signing}>
                     <GoogleImage src={logoGoogle} />Entre com Google
                 </LoginButton>
+                <LoginButton onClick={onSubmit} color='#EDD62E' disabled={signing}>Login</LoginButton>
+
                 <OrSeparator backgroundColor="#3D1C03">
                     <span>ou</span>
                 </OrSeparator>
