@@ -1,9 +1,10 @@
 import { SetAuth } from "./SetAuth";
+import { apiUrl } from "./apiUrl";
 
 export const getEvents = async () => {
     const accessToken = await SetAuth();
     if(accessToken){
-        const response = await fetch('http://localhost:8000/api/events/get/', {
+        const response = await fetch(apiUrl+'/events/get/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

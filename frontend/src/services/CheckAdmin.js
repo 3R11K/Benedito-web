@@ -1,9 +1,11 @@
+import { apiUrl } from "./apiUrl";
+
 const CheckAdmin = async () => {
     const accessToken = localStorage.getItem('accessToken');
 
     if (accessToken) {
         try {
-            const response = await fetch("http://localhost:8000/api/auth/verify", {
+            const response = await fetch(apiUrl+"/auth/verify", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

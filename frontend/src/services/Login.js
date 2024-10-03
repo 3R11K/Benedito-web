@@ -1,5 +1,10 @@
-const loginGoogle = async (email, name) => {
-    await fetch('http://localhost:8000/api/auth/reg-google', {
+import { apiUrl } from "./apiUrl";
+
+
+
+export const loginGoogle = async (email, name) => {
+    console.log(apiUrl)
+    await fetch(apiUrl+'/auth/reg-google', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -16,5 +21,3 @@ const loginGoogle = async (email, name) => {
         console.error('Error:', error);
     });
 }
-
-module.exports = { loginGoogle };

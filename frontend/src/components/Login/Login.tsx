@@ -60,6 +60,7 @@ const Login: React.FC = () => {
     };
     
     useEffect(() => {
+        console.log("URL",process.env.REACT_APP_API_URL_PROD);
         console.log("currentuser: ", currentUser);
         checkLoginStatus();
     }, [currentUser]);
