@@ -6,6 +6,7 @@ import { BodySite } from "../../Global.tsx";
 import { getEvent } from "../../services/EventService.js";
 import { EventContainer, EventTitle, EventDetail, EventImage, IconWrapper, ToggleButton, ParticipationButton } from "./styles.tsx";
 import { FaCalendarAlt, FaMapMarkerAlt, FaUser } from "react-icons/fa";
+import Loading from "../Loading/Loading.tsx";
 
 interface Event {
     id: string;
@@ -51,7 +52,7 @@ const EventPage = () => {
             <>
                 <SideBar />
                 <BodySite>
-                    <p>Carregando...</p>
+                    <Loading />
                 </BodySite>
             </>
         );
