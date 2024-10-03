@@ -24,7 +24,7 @@ export const getEvent = async (id) => {
     const accessToken = await SetAuth();
     console.log("entrou: ",id);
     if(accessToken){
-        const response = await fetch(`http://localhost:8000/api/events/get/?id=${id}`, {
+        const response = await fetch(apiUrl+`/events/get/?id=${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
